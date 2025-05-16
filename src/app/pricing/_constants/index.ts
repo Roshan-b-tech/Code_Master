@@ -28,7 +28,7 @@ export const FEATURES = {
     "Advanced AI",
     "Custom theme builder",
     "Integrated debugging tools",
-    "Multi-language support",
+    "Full language support (JS, Python & Java free)",
   ],
   collaboration: [
     "Real-time pair programming",
