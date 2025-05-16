@@ -41,7 +41,7 @@ function ThemeSelector() {
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-48 group relative flex items-center gap-2 px-4 py-2.5 bg-[#1e1e2e]/80 hover:bg-[#262637] 
+        className="max-md:!w-[120px] w-48 group relative flex items-center gap-2 px-4 py-2.5 bg-[#1e1e2e]/80 hover:bg-[#262637] 
         rounded-lg transition-all duration-200 border border-gray-800/50 hover:border-gray-700"
       >
         {/* hover state bg decorator */}
@@ -49,14 +49,13 @@ function ThemeSelector() {
 
         <Palette className="w-4 h-4 text-gray-400 group-hover:text-gray-300 transition-colors" />
 
-        <span className="text-gray-300 min-w-[80px] text-left group-hover:text-white transition-colors">
+        <span className="text-gray-300 min-w-[80px] max-md:min-w-[50px] max-md:text-sm text-left group-hover:text-white transition-colors truncate">
           {currentTheme?.label}
         </span>
 
         {/* color indicator */}
-
         <div
-          className="relative w-4 h-4 rounded-full border border-gray-600 group-hover:border-gray-500 transition-colors"
+          className="relative w-4 h-4 flex-shrink-0 rounded-full border border-gray-600 group-hover:border-gray-500 transition-colors"
           style={{ background: currentTheme?.color }}
         />
       </motion.button>
@@ -69,7 +68,7 @@ function ThemeSelector() {
             exit={{ opacity: 0, y: 8, scale: 0.96 }}
             transition={{ duration: 0.2 }}
             className="absolute top-full left-0 mt-2 w-full min-w-[240px] bg-[#1e1e2e]/95 
-            backdrop-blur-xl rounded-xl border border-[#313244] shadow-2xl py-2 z-50"
+            backdrop-blur-xl rounded-xl border border-[#313244] shadow-2xl py-2 z-50 max-md:!fixed max-md:left-2 max-md:right-2 max-md:w-auto"
           >
             <div className="px-2 pb-2 mb-2 border-b border-gray-800/50">
               <p className="text-xs font-medium text-gray-400 px-2">Select Theme</p>
@@ -96,7 +95,7 @@ function ThemeSelector() {
                 {/* icon */}
                 <div
                   className={`
-                flex items-center justify-center size-8 rounded-lg
+                flex items-center justify-center size-8 rounded-lg flex-shrink-0
                 ${theme === t.id ? "bg-blue-500/10 text-blue-400" : "bg-gray-800/50 text-gray-400"}
                 group-hover:scale-110 transition-all duration-200
               `}
@@ -110,7 +109,7 @@ function ThemeSelector() {
 
                 {/* color indicator */}
                 <div
-                  className="relative size-4 rounded-full border border-gray-600 
+                  className="relative size-4 rounded-full border border-gray-600 flex-shrink-0
                 group-hover:border-gray-500 transition-colors"
                   style={{ background: t.color }}
                 />

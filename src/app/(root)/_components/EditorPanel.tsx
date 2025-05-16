@@ -49,9 +49,9 @@ function EditorPanel() {
 
   return (
     <div className="relative">
-      <div className="relative bg-[#12121a]/90 backdrop-blur rounded-xl border border-white/[0.05] p-6">
+      <div className="relative bg-[#12121a]/90 backdrop-blur rounded-xl border border-white/[0.05] p-6 max-md:p-4">
         {/* Header */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-4 max-md:flex-col max-md:items-start max-md:gap-3">
           <div className="flex items-center gap-3">
             <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#1e1e2e] ring-1 ring-white/5">
               <Image src={"/" + language + ".png"} alt="Logo" width={24} height={24} />
@@ -61,20 +61,20 @@ function EditorPanel() {
               <p className="text-xs text-gray-500">Write and execute your code</p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 max-md:w-full max-md:flex-wrap max-md:gap-2 max-md:justify-between">
             {/* Font Size Slider */}
-            <div className="flex items-center gap-3 px-3 py-2 bg-[#1e1e2e] rounded-lg ring-1 ring-white/5">
+            <div className="flex items-center gap-3 max-md:gap-2 px-3 py-2 max-md:py-1.5 bg-[#1e1e2e] rounded-lg ring-1 ring-white/5">
               <TypeIcon className="size-4 text-gray-400" />
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 max-md:gap-2">
                 <input
                   type="range"
                   min="12"
                   max="24"
                   value={fontSize}
                   onChange={(e) => handleFontSizeChange(parseInt(e.target.value))}
-                  className="w-20 h-1 bg-gray-600 rounded-lg cursor-pointer"
+                  className="w-20 max-md:w-16 h-1 bg-gray-600 rounded-lg cursor-pointer"
                 />
-                <span className="text-sm font-medium text-gray-400 min-w-[2rem] text-center">
+                <span className="text-sm max-md:text-xs font-medium text-gray-400 min-w-[2rem] text-center">
                   {fontSize}
                 </span>
               </div>
@@ -95,11 +95,11 @@ function EditorPanel() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setIsShareDialogOpen(true)}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg overflow-hidden bg-gradient-to-r
+              className="inline-flex items-center gap-2 px-4 max-md:px-3 py-2 rounded-lg overflow-hidden bg-gradient-to-r
                from-blue-500 to-blue-600 opacity-90 hover:opacity-100 transition-opacity"
             >
               <ShareIcon className="size-4 text-white" />
-              <span className="text-sm font-medium text-white ">Share</span>
+              <span className="text-sm max-md:text-xs font-medium text-white ">Share</span>
             </motion.button>
           </div>
         </div>
@@ -109,6 +109,7 @@ function EditorPanel() {
           {clerk.loaded && (
             <Editor
               height="600px"
+              className="max-md:!h-[350px]"
               language={LANGUAGE_CONFIG[language].monacoLanguage}
               onChange={handleEditorChange}
               theme={theme}

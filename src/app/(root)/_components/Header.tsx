@@ -20,8 +20,8 @@ async function Header() {
   return (
     <div className="relative z-10">
       <div
-        className="flex items-center lg:justify-between justify-center 
-        bg-[#0a0a0f]/80 backdrop-blur-xl p-6 mb-4 rounded-lg"
+        className="flex items-center lg:justify-between justify-center max-md:flex-col max-md:items-center
+        bg-[#0a0a0f]/80 backdrop-blur-xl p-6 max-md:p-4 mb-4 rounded-lg"
       >
         <div className="hidden lg:flex items-center gap-8">
           <Link href="/" className="flex items-center gap-3 group relative">
@@ -72,32 +72,56 @@ async function Header() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-3">
+        {/* Mobile Logo - appears only on small devices */}
+        <div className="flex lg:hidden items-center gap-4 max-md:mb-4">
+          <Link href="/" className="flex items-center gap-3 group relative">
+            <div className="relative bg-gradient-to-br from-[#1a1a2e] to-[#0a0a0f] p-2 rounded-xl ring-1 ring-white/10">
+              <Blocks className="size-6 text-blue-400" />
+            </div>
+            <div>
+              <span className="block text-lg font-semibold bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 text-transparent bg-clip-text">
+                CodeCraft
+              </span>
+            </div>
+          </Link>
+          <Link
+            href="/snippets"
+            className="relative flex items-center gap-2 px-4 py-1.5 rounded-lg text-gray-300 bg-gray-800/50 
+              border border-gray-800 hover:border-blue-500/50 transition-all duration-300 shadow-lg overflow-hidden"
+          >
+            <Code2 className="w-4 h-4 relative z-10" />
+            <span className="text-sm font-medium">Snippets</span>
+          </Link>
+        </div>
+
+        <div className="flex items-center gap-4 max-md:gap-2 max-md:flex-wrap max-md:justify-center">
+          <div className="flex items-center gap-3 max-md:gap-2 max-md:mb-2 max-md:w-full max-md:justify-center">
             <ThemeSelector />
             <LanguageSelector hasAccess={Boolean(convexUser?.isPro)} />
           </div>
 
-          {!convexUser?.isPro && (
-            <Link
-              href="/pricing"
-              className="flex items-center gap-2 px-4 py-1.5 rounded-lg border border-amber-500/20 hover:border-amber-500/40 bg-gradient-to-r from-amber-500/10 
-                to-orange-500/10 hover:from-amber-500/20 hover:to-orange-500/20 
-                transition-all duration-300"
-            >
-              <Sparkles className="w-4 h-4 text-amber-400 hover:text-amber-300" />
-              <span className="text-sm font-medium text-amber-400/90 hover:text-amber-300">
-                Pro
-              </span>
-            </Link>
-          )}
+          <div className="flex items-center gap-3 max-md:gap-2 max-md:w-full max-md:justify-center">
+            {!convexUser?.isPro && (
+              <Link
+                href="/pricing"
+                className="flex items-center gap-2 px-4 max-md:px-3 py-1.5 rounded-lg border border-amber-500/20 hover:border-amber-500/40 bg-gradient-to-r from-amber-500/10 
+                  to-orange-500/10 hover:from-amber-500/20 hover:to-orange-500/20 
+                  transition-all duration-300"
+              >
+                <Sparkles className="w-4 h-4 text-amber-400 hover:text-amber-300" />
+                <span className="text-sm max-md:text-xs font-medium text-amber-400/90 hover:text-amber-300">
+                  Pro
+                </span>
+              </Link>
+            )}
 
-          <SignedIn>
-            <RunButton />
-          </SignedIn>
+            <SignedIn>
+              <RunButton />
+            </SignedIn>
 
-          <div className="pl-3 border-l border-gray-800">
-            <HeaderProfileBtn />
+            <div className="pl-3 border-l border-gray-800 max-md:border-0 max-md:pl-0">
+              <HeaderProfileBtn />
+            </div>
           </div>
         </div>
       </div>

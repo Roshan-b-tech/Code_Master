@@ -5,7 +5,7 @@ import { User } from "lucide-react";
 
 function HeaderProfileBtn() {
   return (
-    <>
+    <div className="max-md:scale-90 max-md:transform-origin-right">
       <UserButton>
         <UserButton.MenuItems>
           <UserButton.Link
@@ -19,7 +19,7 @@ function HeaderProfileBtn() {
       <SignedOut>
         <LoginButton />
       </SignedOut>
-    </>
+    </div>
   );
 }
 export default HeaderProfileBtn;
