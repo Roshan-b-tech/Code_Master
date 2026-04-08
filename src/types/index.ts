@@ -13,21 +13,16 @@ export interface Language {
   logoPath: string;
   monacoLanguage: string;
   defaultCode: string;
-  pistonRuntime: LanguageRuntime;
-}
-
-export interface LanguageRuntime {
-  language: string;
-  version: string;
+  judge0Id: number;
 }
 
 export interface ExecuteCodeResponse {
-  compile?: {
-    output: string;
-  };
-  run?: {
-    output: string;
-    stderr: string;
+  stdout: string | null;
+  stderr: string | null;
+  compile_output: string | null;
+  status: {
+    id: number;
+    description: string;
   };
 }
 

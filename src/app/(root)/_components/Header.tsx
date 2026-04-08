@@ -101,26 +101,26 @@ async function Header() {
           </div>
 
           <div className="flex items-center gap-3 max-md:gap-2 max-md:w-full max-md:justify-center">
-            {!convexUser?.isPro && (
-              <Link
-                href="/pricing"
+          {!convexUser?.isPro && (
+            <Link
+              href="/pricing"
                 className="flex items-center gap-2 px-4 max-md:px-3 py-1.5 rounded-lg border border-amber-500/20 hover:border-amber-500/40 bg-gradient-to-r from-amber-500/10 
-                  to-orange-500/10 hover:from-amber-500/20 hover:to-orange-500/20 
-                  transition-all duration-300"
-              >
-                <Sparkles className="w-4 h-4 text-amber-400 hover:text-amber-300" />
+                to-orange-500/10 hover:from-amber-500/20 hover:to-orange-500/20 
+                transition-all duration-300"
+            >
+              <Sparkles className="w-4 h-4 text-amber-400 hover:text-amber-300" />
                 <span className="text-sm max-md:text-xs font-medium text-amber-400/90 hover:text-amber-300">
-                  Pro
-                </span>
-              </Link>
-            )}
+                Pro
+              </span>
+            </Link>
+          )}
 
-            <SignedIn>
-              <RunButton />
-            </SignedIn>
+          <SignedIn>
+            <RunButton />
+          </SignedIn>
 
             <div className="pl-3 border-l border-gray-800 max-md:border-0 max-md:pl-0">
-              <HeaderProfileBtn />
+            <HeaderProfileBtn />
             </div>
           </div>
         </div>

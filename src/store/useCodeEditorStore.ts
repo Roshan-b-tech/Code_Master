@@ -83,58 +83,58 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
       set({ isRunning: true, error: null, output: "" });
 
       try {
-        const runtime = LANGUAGE_CONFIG[language].pistonRuntime;
-        const response = await fetch("https://emkc.org/api/v2/piston/execute", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            language: runtime.language,
-            version: runtime.version,
-            files: [{ content: code }],
-          }),
-        });
+        const languageId = LANGUAGE_CONFIG[language].judge0Id;
+        const response = await fetch(
+          "https://ce.judge0.com/submissions?base64_encoded=false&wait=true",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              language_id: languageId,
+              source_code: code,
+            }),
+          }
+        );
 
         const data = await response.json();
 
-        console.log("data back from piston:", data);
+        console.log("data back from judge0:", data);
 
-        // handle API-level erros
-        if (data.message) {
-          set({ error: data.message, executionResult: { code, output: "", error: data.message } });
+        // handle API-level errors
+        if (data.error) {
+          set({ error: data.error, executionResult: { code, output: "", error: data.error } });
           return;
         }
+
+        // status id 3 = Accepted (successful execution)
+        // status id 6 = Compilation Error
+        // status id 5 = Time Limit Exceeded
+        // status id 11+ = Runtime errors
 
         // handle compilation errors
-        if (data.compile && data.compile.code !== 0) {
-          const error = data.compile.stderr || data.compile.output;
+        if (data.status?.id === 6) {
+          const error = data.compile_output || "Compilation error";
           set({
             error,
-            executionResult: {
-              code,
-              output: "",
-              error,
-            },
+            executionResult: { code, output: "", error },
           });
           return;
         }
 
-        if (data.run && data.run.code !== 0) {
-          const error = data.run.stderr || data.run.output;
+        // handle runtime errors or non-accepted status
+        if (data.status?.id !== 3) {
+          const error = data.stderr || data.compile_output || data.status?.description || "Execution error";
           set({
             error,
-            executionResult: {
-              code,
-              output: "",
-              error,
-            },
+            executionResult: { code, output: "", error },
           });
           return;
         }
 
-        // if we get here, execution was successful
-        const output = data.run.output;
+        // successful execution
+        const output = data.stdout || "";
 
         set({
           output: output.trim(),
